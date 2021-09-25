@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.AppBarLayout;
+
+import jade.core.Agent;
 
 import us.app.restaurant.data.RestaurantData;
 
