@@ -1,14 +1,12 @@
 package the.project.main;
 
-import jade.core.Agent;
-import the.project.main.agent.HelloAgent;
-
 public class Main {
     
     public static void main(String[] args) {
-        Agent agent = new HelloAgent();
-        agent.setArguments(args);
-        agent.run();
+        // coloquei os argumentos em código para facilitar na inicialização
+        // o seguindo argumento é para a criação do agente inicial
+        String [] a = { "-gui", "GuiAgent:the.project.main.agents.gui.GuiAgent" };
+        jade.Boot.main(a);
     }
     
 }
