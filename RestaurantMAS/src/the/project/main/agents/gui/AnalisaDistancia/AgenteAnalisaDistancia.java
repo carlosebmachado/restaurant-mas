@@ -7,6 +7,7 @@ package the.project.main.agents.gui.AnalisaDistancia;
 
 import the.project.main.agents.gui.AgenteBuscaRestaurante.*;
 import jade.core.Agent;
+import the.project.main.agents.gui.ReceiveBehabviour;
 
 /**
  *
@@ -18,7 +19,7 @@ public class AgenteAnalisaDistancia extends Agent {
 
     @Override
     protected void setup(){
-       
+       addBehaviour(new ReceiveBehabviour(this));
     }
 
     

@@ -7,6 +7,7 @@ package the.project.main.agents.gui.AgenteAnalisaPreco;
 
 
 import jade.core.Agent;
+import the.project.main.agents.gui.ReceiveBehabviour;
 
 /**
  *
@@ -18,7 +19,7 @@ public class AgenteAnalisaPreco extends Agent {
 
     @Override
     protected void setup(){
-       
+       addBehaviour(new ReceiveBehabviour(this));
     }
 
     

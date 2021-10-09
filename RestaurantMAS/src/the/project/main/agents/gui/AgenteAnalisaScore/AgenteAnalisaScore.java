@@ -5,8 +5,15 @@
  */
 package the.project.main.agents.gui.AgenteAnalisaScore;
 
-import the.project.main.agents.gui.AgenteBuscaRestaurante.*;
+
 import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import the.project.main.agents.gui.ReceiveBehabviour;
+
 
 /**
  *
@@ -18,7 +25,7 @@ public class AgenteAnalisaScore extends Agent {
 
     @Override
     protected void setup(){
-       
+        addBehaviour(new ReceiveBehabviour(this));
     }
 
     

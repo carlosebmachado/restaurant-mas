@@ -6,6 +6,7 @@
 package the.project.main.agents.gui.AgenteBuscaRestaurante;
 
 import jade.core.Agent;
+import the.project.main.agents.gui.ReceiveBehabviour;
 
 /**
  *
@@ -13,21 +14,13 @@ import jade.core.Agent;
  */
 public class AgenteBuscaRestaurante extends Agent {
     
-    private boolean greeting = true;
 
     @Override
     protected void setup(){
-       
+       addBehaviour(new ReceiveBehabviour(this));
     }
 
     
 
-    public boolean isGreeting() {
-        return greeting;
-    }
-
-    public void setGreeting(boolean greeting) {
-        this.greeting = greeting;
-    }
     
 }
