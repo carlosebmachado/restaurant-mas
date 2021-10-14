@@ -7,7 +7,8 @@ package the.project.main.agents.gui.AgenteAnalisaPreco;
 
 
 import jade.core.Agent;
-import the.project.main.agents.gui.ReceiveBehabviour;
+import jade.core.behaviours.OneShotBehaviour;
+import objects.Restaurante;
 
 /**
  *
@@ -19,17 +20,21 @@ public class AgenteAnalisaPreco extends Agent {
 
     @Override
     protected void setup(){
-       addBehaviour(new ReceiveBehabviour(this));
+        addBehaviour(new OneShotBehaviour() {			
+			@Override
+			public void action() {
+				System.out.println("Novo agente Busca Restaurante criado!!");
+			}
+		});
+       addBehaviour(new BehaviourNalisaPreco());
     }
 
     
 
-    public boolean isGreeting() {
-        return greeting;
+    public Restaurante filtraPreco(Restaurante rest) {
+        //pesqusia dentro do retaurante os preços desejados, caso não atenda o preço retorna nulo
+        return null;
     }
 
-    public void setGreeting(boolean greeting) {
-        this.greeting = greeting;
-    }
     
 }

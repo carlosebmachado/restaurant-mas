@@ -7,7 +7,10 @@ package the.project.main.agents.gui.AnalisaDistancia;
 
 import the.project.main.agents.gui.AgenteBuscaRestaurante.*;
 import jade.core.Agent;
-import the.project.main.agents.gui.ReceiveBehabviour;
+import jade.core.behaviours.OneShotBehaviour;
+import java.util.ArrayList;
+import objects.RequestSearch;
+import objects.Restaurante;
 
 /**
  *
@@ -19,17 +22,33 @@ public class AgenteAnalisaDistancia extends Agent {
 
     @Override
     protected void setup(){
-       addBehaviour(new ReceiveBehabviour(this));
+        addBehaviour(new OneShotBehaviour() {			
+			@Override
+			public void action() {
+				System.out.println("Novo agente Busca Restaurante criado!!");
+			}
+		});
+       addBehaviour(new BehaviouAnalisaDistancia());
     }
 
     
 
-    public boolean isGreeting() {
-        return greeting;
+    public RequestSearch filtraDistancia(RequestSearch busca) {
+        //filtra a distancia do restaurante conforme as preferencias do usuário e a distancia do usuário para cada bairro;
+        String[][] preferencias = busca.getPreferencias();
+        ArrayList<Restaurante> restaurantes = busca.getRestaurantes();
+        ArrayList<Restaurante> filterRest = new ArrayList<>();
+        for(Restaurante rest: restaurantes){
+            if(Integer.parseInt(rest.distancia )<= Integer.parseInt(preferencias[2][2]) ){
+                filterRest.add(rest);
+            }
+        }
+        if(!filterRest.isEmpty()){
+            busca.setRestaurantes(filterRest);
+        }
+        
+        return busca;
     }
 
-    public void setGreeting(boolean greeting) {
-        this.greeting = greeting;
-    }
     
 }

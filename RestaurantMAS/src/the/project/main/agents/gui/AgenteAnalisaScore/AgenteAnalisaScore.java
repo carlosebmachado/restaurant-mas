@@ -7,12 +7,9 @@ package the.project.main.agents.gui.AgenteAnalisaScore;
 
 
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.UnreadableException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import the.project.main.agents.gui.ReceiveBehabviour;
+import jade.core.behaviours.OneShotBehaviour;
+import java.util.ArrayList;
+
 
 
 /**
@@ -25,17 +22,21 @@ public class AgenteAnalisaScore extends Agent {
 
     @Override
     protected void setup(){
-        addBehaviour(new ReceiveBehabviour(this));
+        addBehaviour(new OneShotBehaviour() {			
+			@Override
+			public void action() {
+				System.out.println("Novo agente Busca Restaurante criado!!");
+			}
+		});
+        addBehaviour(new BehaviourAnalisaScore());
     }
 
     
 
-    public boolean isGreeting() {
-        return greeting;
+    public ArrayList filtraScore(ArrayList restaurantes) {
+        /// filtra pelo score, caso não atenda retira o restaurante da lista.
+        return restaurantes;
     }
 
-    public void setGreeting(boolean greeting) {
-        this.greeting = greeting;
-    }
     
 }

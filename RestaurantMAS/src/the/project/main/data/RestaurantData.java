@@ -52,5 +52,46 @@ public class RestaurantData {
             "Pães, tortas e doces"
         }
     };
+    public static final String[][] produtoXpreco =
+    {
+        {
+            "Pastel",
+            "6.00"
+        },
+        {
+            "Hamburguer",
+            "10.00"
+            
+        },
+        {
+            "Cachorro-quente",
+            "6.00"
+        },
+        {
+            "Pizza",
+            "30.00"
+        }
+    };
+    
+     public static final String[][] bairroXdistancia =
+    {
+        {
+            "São João",
+            "6"
+        },
+        {
+            "Centro",
+            "10"
+            
+        },
+        {
+            "Cidade Nova",
+            "5"
+        },
+        {
+            "Praia Brava",
+            "15"
+        }
+    };
 
 }
