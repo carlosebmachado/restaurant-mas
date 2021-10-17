@@ -1,18 +1,18 @@
-package the.project.main.agents;
+package the.project.core.objects;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable {
     
     private String type;
-    private float priceFrom;
-    private float priceTo;
+    private String price;
     private float distanceFrom;
     private float distanceTo;
     private String score;
 
-    public Request(String type, float priceFrom, float priceTo, float distanceFrom, float distanceTo, String score) {
+    public Request(String type, String price, float distanceFrom, float distanceTo, String score) {
         this.type = type;
-        this.priceFrom = priceFrom;
-        this.priceTo = priceTo;
+        this.price = price;
         this.distanceFrom = distanceFrom;
         this.distanceTo = distanceTo;
         this.score = score;
@@ -26,20 +26,12 @@ public class Request {
         this.type = type;
     }
 
-    public float getPriceFrom() {
-        return priceFrom;
+    public String getPrice() {
+        return price;
     }
 
-    public void setPriceFrom(float priceFrom) {
-        this.priceFrom = priceFrom;
-    }
-
-    public float getPriceTo() {
-        return priceTo;
-    }
-
-    public void setPriceTo(float priceTo) {
-        this.priceTo = priceTo;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public float getDistanceFrom() {

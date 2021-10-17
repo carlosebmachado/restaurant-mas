@@ -1,4 +1,4 @@
-package the.project.main.data;
+package the.project.core.data;
 
 public class RestaurantData {
 

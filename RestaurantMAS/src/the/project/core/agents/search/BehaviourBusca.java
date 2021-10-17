@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package the.project.main.agents.gui.AgenteBuscaRestaurante;
+package the.project.core.agents.search;
 
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -11,7 +11,7 @@ import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import objects.RequestSearch;
+import the.project.core.objects.RequestSearch;
 
 
 /**
@@ -22,9 +22,9 @@ public class BehaviourBusca extends CyclicBehaviour{
 
     @Override   
     public void action() {
-	ACLMessage message = receiveMessage(ACLMessage.INFORM);	
+	ACLMessage message = receiveMessage(ACLMessage.REQUEST);	
          if (message != null) {
-            System.out.println("Recebeu uma mensagem INFORM");
+            System.out.println("Recebeu uma mensagem REQUEST");
             RequestSearch busca;	
             try {
                 busca = (RequestSearch) message.getContentObject();
