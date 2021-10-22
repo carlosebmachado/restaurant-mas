@@ -20,7 +20,7 @@ public class DistanceAgent extends Agent {
         addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
-                System.out.println("Agente de distância craido.");
+                System.out.println("Olá. Eu sou o " + getLocalName() + ".");
             }
         });
 
@@ -29,6 +29,8 @@ public class DistanceAgent extends Agent {
             public void action() {
                 ACLMessage rec = myAgent.receive();
                 if (rec != null) {
+                    System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
+                    String receiver = "SearchAgent";
                     try {
                         RequestSearch req = (RequestSearch) rec.getContentObject();
 
@@ -42,13 +44,14 @@ public class DistanceAgent extends Agent {
                         }
                         
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                        msg.addReceiver(new AID("SearchAgent", AID.ISLOCALNAME));
+                        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(req);
                         send(msg);
+                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
 
                     } catch (UnreadableException e) {
                     } catch (IOException ex) {
-                        System.out.println("Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ".");
                     }
                 } else {
                     block();

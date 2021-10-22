@@ -30,6 +30,7 @@ public class ScoreAgent extends Agent {
                 ACLMessage rec = receive();
                 if (rec != null) {
                     System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
+                    String receiver = "SearchAgent";
                     try {
                         RequestSearch req = (RequestSearch) rec.getContentObject();
 
@@ -42,14 +43,14 @@ public class ScoreAgent extends Agent {
                         }
                         
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                        msg.addReceiver(new AID("SearchAgent", AID.ISLOCALNAME));
+                        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(req);
                         send(msg);
-                        System.out.println(getLocalName() + ": Enviei uma mensagem de " + rec.getSender().getLocalName() + ".");
+                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
 
                     } catch (UnreadableException e) {
                     } catch (IOException ex) {
-                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + rec.getSender().getLocalName() + ".");
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ".");
                     }
                 } else {
                     block();

@@ -71,26 +71,29 @@ public class GuiAgent extends Agent {
         addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
-                System.out.println("Agente de interface craido.");
+                System.out.println("Olá. Eu sou o " + getLocalName() + ".");
             }
         });
         
         addBehaviour(new CyclicBehaviour(this) {
             @Override
             public void action() {
-                ACLMessage rec = myAgent.receive();
+                ACLMessage rec = receive();
+                String receiver = "SearchAgent";
                 if (rec != null) {
+                    System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
                     try {
                         Request req = (Request) rec.getContentObject();
                         
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                        msg.addReceiver(new AID("SearchAgent", AID.ISLOCALNAME));
+                        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(new RequestSearch(req));
                         send(msg);
+                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
                         
                     } catch (UnreadableException e) {
                     } catch (IOException e) {
-                        System.out.println("Erro ao enviar mensagem: GuiAgent -> AgenteBuscaRestaurante");
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ".");
                     }
                 } else {
                     block();
@@ -101,8 +104,9 @@ public class GuiAgent extends Agent {
         addBehaviour(new CyclicBehaviour(this) {
             @Override
             public void action() {
-                ACLMessage msg = myAgent.receive();
+                ACLMessage msg = receive();
                 if (msg != null) {
+                    System.out.println(getLocalName() + ": Recebi uma mensagem de " + msg.getSender().getLocalName() + ".");
                     try {
                         RequestSearch req = (RequestSearch) msg.getContentObject();
                         
@@ -115,6 +119,8 @@ public class GuiAgent extends Agent {
                         }).forEachOrdered(_item -> {
                             paneResult.repaint();
                         });
+                        
+                        System.out.println(getLocalName() + ": Entreguei as informações requisitadas pelo Usuário.");
                         
                     } catch (UnreadableException e) {}
                 } else {
@@ -150,6 +156,7 @@ public class GuiAgent extends Agent {
         
         try {
             ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+            msg.setSender(new AID("Usuário", AID.ISLOCALNAME));
             msg.addReceiver(new AID("GuiAgent", AID.ISLOCALNAME));
             msg.setContentObject(new Request(type, price, distanceFrom, distanceTo, score));
             send(msg);
