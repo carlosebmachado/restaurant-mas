@@ -1,13 +1,8 @@
 package the.project.core.data;
 
-public class RestaurantData {
+import the.project.core.objects.Restaurant;
 
-    public static final int PHOTO    = 0;
-    public static final int NAME     = 1;
-    public static final int SCORE    = 2;
-    public static final int PRICE    = 3;
-    public static final int DISTANCE = 4;
-    public static final int TYPE     = 5;
+public class RestaurantData {
 
     // Data
     // Photo:    Inteiro representando a imagem de 0 a 15
@@ -17,81 +12,78 @@ public class RestaurantData {
     // Distance: em quilometros utilizando vírgula (ex: 5,5km)
     // Type:     String da categoria do restaurante
 
-    public static final String[][] data =
+    public static final Restaurant[] data =
     {
-        {
-            "0",
+        new Restaurant(
             "Babico Pastelaria",
             "⋆⋆⋆⋆",
             "$$$",
             "8,7km",
             "Pastel"
-        },
-        {
-            "1",
+        ),
+        new Restaurant(
             "Restaurante Sal & Brasa",
             "⋆⋆⋆⋆⋆",
             "$$",
             "4,7km",
             "Brasileira"
-        },
-        {
-            "2",
+        ),
+        new Restaurant(
             "Lanchonete Old Burger",
             "⋆⋆⋆",
             "$$$",
             "3,4km",
             "Hamburguer"
-        },
-        {
-            "3",
+        ),
+        new Restaurant(
             "Panificadora Larissa",
             "⋆⋆⋆⋆⋆",
             "$$$",
             "2,1km",
             "Pães, tortas e doces"
-        }
+        )
     };
-    public static final String[][] produtoXpreco =
-    {
-        {
-            "Pastel",
-            "6.00"
-        },
-        {
-            "Hamburguer",
-            "10.00"
-            
-        },
-        {
-            "Cachorro-quente",
-            "6.00"
-        },
-        {
-            "Pizza",
-            "30.00"
-        }
-    };
-    
-     public static final String[][] bairroXdistancia =
-    {
-        {
-            "São João",
-            "6"
-        },
-        {
-            "Centro",
-            "10"
-            
-        },
-        {
-            "Cidade Nova",
-            "5"
-        },
-        {
-            "Praia Brava",
-            "15"
-        }
-    };
+
+//    public static final String[][] produtoXpreco =
+//    {
+//        {
+//            "Pastel",
+//            "6.00"
+//        },
+//        {
+//            "Hamburguer",
+//            "10.00"
+//            
+//        },
+//        {
+//            "Cachorro-quente",
+//            "6.00"
+//        },
+//        {
+//            "Pizza",
+//            "30.00"
+//        }
+//    };
+//    
+//     public static final String[][] bairroXdistancia =
+//    {
+//        {
+//            "São João",
+//            "6"
+//        },
+//        {
+//            "Centro",
+//            "10"
+//            
+//        },
+//        {
+//            "Cidade Nova",
+//            "5"
+//        },
+//        {
+//            "Praia Brava",
+//            "15"
+//        }
+//    };
 
 }

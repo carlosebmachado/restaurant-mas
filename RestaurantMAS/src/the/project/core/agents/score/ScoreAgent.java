@@ -20,15 +20,16 @@ public class ScoreAgent extends Agent {
         addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
-                System.out.println("Agente de score craido.");
+                System.out.println("Olá. Eu sou o " + getLocalName() + ".");
             }
         });
 
         addBehaviour(new CyclicBehaviour(this) {
             @Override
             public void action() {
-                ACLMessage rec = myAgent.receive();
+                ACLMessage rec = receive();
                 if (rec != null) {
+                    System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
                     try {
                         RequestSearch req = (RequestSearch) rec.getContentObject();
 
@@ -44,10 +45,11 @@ public class ScoreAgent extends Agent {
                         msg.addReceiver(new AID("SearchAgent", AID.ISLOCALNAME));
                         msg.setContentObject(req);
                         send(msg);
+                        System.out.println(getLocalName() + ": Enviei uma mensagem de " + rec.getSender().getLocalName() + ".");
 
                     } catch (UnreadableException e) {
                     } catch (IOException ex) {
-                        System.out.println("Erro ao enviar mensagem: ScoreAgent -> AgenteBuscaRestaurante");
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + rec.getSender().getLocalName() + ".");
                     }
                 } else {
                     block();
