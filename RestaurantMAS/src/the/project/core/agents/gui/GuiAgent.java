@@ -242,12 +242,14 @@ public class GuiAgent extends Agent {
         paneFilter.add(lblDistance);
         
         txtDistanceFrom.setBounds(170, 90, 60, 25);
+        txtDistanceFrom.setText("5");
         paneFilter.add(txtDistanceFrom);
         
         lblTo2.setText("Até");
         lblTo2.setBounds(235, 90, 30, 25);
         paneFilter.add(lblTo2);
         
+        txtDistanceTo.setText("10");
         txtDistanceTo.setBounds(260, 90, 60, 25);
         paneFilter.add(txtDistanceTo);
         
