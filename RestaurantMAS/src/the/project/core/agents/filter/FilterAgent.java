@@ -49,7 +49,7 @@ public class FilterAgent extends Agent {
                         System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
 
                     } catch (UnreadableException e) {
-                    } catch (IOException ex) {
+                    } catch (IOException e) {
                         System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
                     }
                 } else {
