@@ -41,6 +41,13 @@ public class RestaurantData {
             "$$$",
             "2.1",
             "Pães, tortas e doces"
+        ),
+        new Restaurant(
+            "Panificadora Pão Doce",
+            "⋆⋆",
+            "$",
+            "2.1",
+            "Pães, tortas e doces"
         )
     };
 

@@ -1,4 +1,4 @@
-package the.project.core.agents.price;
+package the.project.core.agents.filter;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -12,7 +12,7 @@ import the.project.core.objects.Request;
 import the.project.core.objects.RequestSearch;
 import the.project.core.objects.Restaurant;
 
-public class PriceAgent extends Agent {
+public class FilterAgent extends Agent {
 
     @Override
     protected void setup() {
@@ -37,7 +37,7 @@ public class PriceAgent extends Agent {
                         Request preferencias = req.getPreferencias();
                         ArrayList<Restaurant> restaurantes = req.getRestaurantes();
                         for (Restaurant rest : restaurantes) {
-                            if (!rest.getPrice().equalsIgnoreCase(preferencias.getPrice())) {
+                            if (filter(rest, preferencias)) {
                                 restaurantes.remove(rest);
                             }
                         }
@@ -58,6 +58,10 @@ public class PriceAgent extends Agent {
             }
         });
 
+    }
+    
+    protected boolean filter(Restaurant rest, Request preferencias) {
+        return false;
     }
 
 }

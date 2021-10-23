@@ -5,11 +5,13 @@
  */
 package the.project.core.objects;
 
+import java.io.Serializable;
+
 /**
  *
  * @author JF
  */
-public class Restaurant {
+public class Restaurant implements Serializable {
     
     private String name;
     private String score;
