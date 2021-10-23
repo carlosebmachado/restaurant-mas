@@ -50,7 +50,7 @@ public class FilterAgent extends Agent {
 
                     } catch (UnreadableException e) {
                     } catch (IOException ex) {
-                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ".");
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
                     }
                 } else {
                     block();

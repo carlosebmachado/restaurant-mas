@@ -99,7 +99,7 @@ public class GuiAgent extends Agent {
                         
                     } catch (UnreadableException e) {
                     } catch (IOException e) {
-                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + "." + e.toString());
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
                     }
                 } else {
                     block();
