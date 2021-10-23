@@ -18,28 +18,28 @@ public class RestaurantData {
             "Babico Pastelaria",
             "⋆⋆⋆⋆",
             "$$$",
-            "8,7km",
+            "8.7",
             "Pastel"
         ),
         new Restaurant(
             "Restaurante Sal & Brasa",
             "⋆⋆⋆⋆⋆",
             "$$",
-            "4,7km",
+            "4.7",
             "Brasileira"
         ),
         new Restaurant(
             "Lanchonete Old Burger",
             "⋆⋆⋆",
             "$$$",
-            "3,4km",
+            "3.4",
             "Hamburguer"
         ),
         new Restaurant(
             "Panificadora Larissa",
             "⋆⋆⋆⋆⋆",
             "$$$",
-            "2,1km",
+            "2.1",
             "Pães, tortas e doces"
         )
     };

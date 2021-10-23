@@ -36,7 +36,7 @@ public class AgenteBuscaRestaurante extends Agent {
         addBehaviour(new OneShotBehaviour() {
             @Override
             public void action() {
-                System.out.println("Novo agente Busca Restaurante criado!!");
+                System.out.println("SearchAgente:Olá!! Eu sou o SearchAgent.");
             }
         });
         addBehaviour(new BehaviourBusca());
@@ -44,7 +44,7 @@ public class AgenteBuscaRestaurante extends Agent {
         FSMBehaviour behaviour = new FSMBehaviour(this) {
             @Override
             public int onEnd() {
-                System.out.println("FSM Behaviour finalized with success.");
+                System.out.println("SearchAgente:Finalizado FSM Behaviour.");
                 return 0;
             }
         };
@@ -52,12 +52,11 @@ public class AgenteBuscaRestaurante extends Agent {
             private int state = 0;
             @Override
             public void action() {
-                System.out.println("Executing behavour W");
-                MessageTemplate template = 
-                     MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST), MessageTemplate.MatchOntology("interface"));				
+                System.out.println("SearchAgente:Executing behavour Receber mensagem e enviar para o PriceAgent");
+                MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);			
                 ACLMessage message = myAgent.receive(template);
                 if (message != null) {
-                   System.out.println("Recebeu uma mensagem REQUEST");
+                   System.out.println("SearchAgente:Recebi uma mensagem Do SearchAgent");
                    RequestSearch busca;	
                    try {
                        busca = (RequestSearch) message.getContentObject();
@@ -65,12 +64,13 @@ public class AgenteBuscaRestaurante extends Agent {
                         msg.addReceiver(new AID("PriceAgent", AID.ISLOCALNAME));
                         msg.setContentObject(busca);
                         send(msg);
+                        System.out.println("SearchAgente:Enviei uma mensagem para o PriceAgent");
                         state = 1;
                     } catch (UnreadableException ex) {
                        Logger.getLogger(AgenteBuscaRestaurante.class.getName()).log(Level.SEVERE, null, ex);
                    }  
                    catch (IOException ep) {
-                        System.out.println("Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
+                        System.out.println("SearchAgente:Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
                     }
                 }
             }
@@ -85,12 +85,11 @@ public class AgenteBuscaRestaurante extends Agent {
             private int state = 0;
             @Override
             public void action() {
-                System.out.println("Executing behavour X");
-                MessageTemplate template = 
-                     MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST), MessageTemplate.MatchOntology("interface"));				
+                System.out.println("SearchAgente:Executing behavour X");
+                MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);			
                 ACLMessage message = myAgent.receive(template);
                 if (message != null) {
-                   System.out.println("Recebeu uma mensagem REQUEST");
+                   System.out.println("SearchAgente:Recebi uma mensagem do PriceAgent");
                    RequestSearch busca;	
                    try {
                        busca = (RequestSearch) message.getContentObject();
@@ -98,12 +97,13 @@ public class AgenteBuscaRestaurante extends Agent {
                         msg.addReceiver(new AID("DistanceAgent", AID.ISLOCALNAME));
                         msg.setContentObject(busca);
                         send(msg);
+                        System.out.println("SearchAgente:Enviei uma mensagem para o DistanceAgent");
                         state = 1;
                     } catch (UnreadableException ex) {
                        Logger.getLogger(AgenteBuscaRestaurante.class.getName()).log(Level.SEVERE, null, ex);
                    }  
                    catch (IOException ep) {
-                        System.out.println("Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
+                        System.out.println("SearchAgente:Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
                     }
                 }
             }
@@ -118,11 +118,10 @@ public class AgenteBuscaRestaurante extends Agent {
             @Override
             public void action() {
                 System.out.println("Executing behavour Y");
-                MessageTemplate template = 
-                     MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST), MessageTemplate.MatchOntology("interface"));				
+                MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);			
                 ACLMessage message = myAgent.receive(template);
                 if (message != null) {
-                   System.out.println("Recebeu uma mensagem REQUEST");
+                   System.out.println("SearchAgente:Recebi uma mensagem do DistanceAgent");
                    RequestSearch busca;	
                    try {
                        busca = (RequestSearch) message.getContentObject();
@@ -130,12 +129,13 @@ public class AgenteBuscaRestaurante extends Agent {
                         msg.addReceiver(new AID("ScoreAgent", AID.ISLOCALNAME));
                         msg.setContentObject(busca);
                         send(msg);
+                        System.out.println("SearchAgente:Enviei uma mensagem para o ScoreAgent");
                         state = 1;
                     } catch (UnreadableException ex) {
                        Logger.getLogger(AgenteBuscaRestaurante.class.getName()).log(Level.SEVERE, null, ex);
                    }  
                    catch (IOException ep) {
-                        System.out.println("Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
+                        System.out.println("SearchAgente:Erro ao enviar mensagem: SearchAgent -> ScoreAgent");
                     }
                 }
             }
@@ -149,12 +149,11 @@ public class AgenteBuscaRestaurante extends Agent {
         behaviour.registerLastState(new CyclicBehaviour(this) {            
             @Override
             public void action() {
-                System.out.println("Executing behavour Z");
-                MessageTemplate template = 
-                     MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.REQUEST), MessageTemplate.MatchOntology("interface"));				
+                System.out.println("SearchAgente:Executing behavour Z");
+                MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);			
                 ACLMessage message = myAgent.receive(template);
                 if (message != null) {
-                   System.out.println("Recebeu uma mensagem REQUEST");
+                   System.out.println("SearchAgente:Recebeu uma mensagem do Score Agent");
                    RequestSearch busca;	
                    try {
                        busca = (RequestSearch) message.getContentObject();
@@ -181,11 +180,12 @@ public class AgenteBuscaRestaurante extends Agent {
                         msg.addReceiver(new AID("GuiAgent", AID.ISLOCALNAME));
                         msg.setContentObject(busca);
                         send(msg);
+                        System.out.println("SearchAgente: Respondendo o GuiAgent");
                     } catch (UnreadableException ex) {
                        Logger.getLogger(AgenteBuscaRestaurante.class.getName()).log(Level.SEVERE, null, ex);
                    }  
                    catch (IOException ep) {
-                        System.out.println("Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
+                        System.out.println("SearchAgente:Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
                     }
                 }
             }           

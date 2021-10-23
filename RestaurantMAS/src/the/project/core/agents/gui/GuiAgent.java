@@ -8,6 +8,7 @@ import jade.lang.acl.UnreadableException;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,8 +21,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 import the.project.core.RestaurantCard;
+import the.project.core.data.RestaurantData;
 import the.project.core.objects.Request;
 import the.project.core.objects.RequestSearch;
+import the.project.core.objects.Restaurant;
 
 public class GuiAgent extends Agent {
 
@@ -84,16 +87,19 @@ public class GuiAgent extends Agent {
                     System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
                     try {
                         Request req = (Request) rec.getContentObject();
-                        
+                        ArrayList<Restaurant> restaurantes = new ArrayList<>();
+                        for(Restaurant rest : RestaurantData.data){
+                             restaurantes.add(rest);
+                        }
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
-                        msg.setContentObject(new RequestSearch(req));
+                        msg.setContentObject(new RequestSearch(restaurantes,req));
                         send(msg);
                         System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
                         
                     } catch (UnreadableException e) {
                     } catch (IOException e) {
-                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ".");
+                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + "." + e.toString());
                     }
                 } else {
                     block();
