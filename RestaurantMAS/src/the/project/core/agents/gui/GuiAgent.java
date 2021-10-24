@@ -35,19 +35,14 @@ public class GuiAgent extends Agent {
     private JComboBox<String> cbType;
     private JComboBox<String> cbScore;
     private JComboBox<String> cbPrice;
-//    private JComboBox<String> cbDistrict;
     private JLabel lblType;
     private JLabel lblDistance;
     private JLabel lblPrice;
     private JLabel lblScore;
-//    private JLabel lblTo1;
     private JLabel lblTo2;
-//    private JLabel lblDistrict;
     private JPanel paneResult;
     private JPanel paneFilter;
     private JScrollPane scroll;
-//    private JTextField txtPriceFrom;
-//    private JTextField txtPriceTo;
     private JTextField txtDistanceFrom;
     private JTextField txtDistanceTo;
     
@@ -94,7 +89,7 @@ public class GuiAgent extends Agent {
                         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(new RequestSearch(restaurantes,req));
                         send(msg);
-                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
+                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".\n");
                         
                     } catch (UnreadableException e) {
                     } catch (IOException e) {
@@ -125,7 +120,7 @@ public class GuiAgent extends Agent {
                             paneResult.repaint();
                         });
                         
-                        System.out.println(getLocalName() + ": Entreguei as informações requisitadas pelo Usuário.");
+                        System.out.println(getLocalName() + ": Entreguei as informações requisitadas pelo Usuário.\n");
                         
                     } catch (UnreadableException e) {}
                 } else {
@@ -141,16 +136,7 @@ public class GuiAgent extends Agent {
         String type = cbType.getSelectedItem().toString();
         String score = cbScore.getSelectedItem().toString();
         String price = cbPrice.getSelectedItem().toString();
-//        String district = cbDistrict.getSelectedItem().toString();
-        
-//        float priceFrom;
-//        try { priceFrom = Float.parseFloat(txtPriceFrom.toString()); }
-//        catch (NumberFormatException e) { priceFrom = 0; }
-//        
-//        float priceTo;
-//        try { priceTo = Float.parseFloat(txtPriceTo.toString()); }
-//        catch (NumberFormatException e) { priceTo = 0; }
-        
+
         float distanceFrom;
         try { distanceFrom = Float.parseFloat(txtDistanceFrom.toString()); }
         catch (NumberFormatException e) { distanceFrom = 0; }
@@ -177,15 +163,10 @@ public class GuiAgent extends Agent {
         lblDistance = new JLabel();
         lblPrice = new JLabel();
         lblScore = new JLabel();
-//        lblTo1 = new JLabel();
         lblTo2 = new JLabel();
-//        lblDistrict = new JLabel();
         cbType = new JComboBox<>();
         cbScore = new JComboBox<>();
-//        cbDistrict = new JComboBox<>();
         cbPrice = new JComboBox<>();
-//        txtPriceFrom = new JTextField();
-//        txtPriceTo = new JTextField();
         txtDistanceFrom = new JTextField();
         txtDistanceTo = new JTextField();
         scroll = new JScrollPane();
@@ -225,16 +206,6 @@ public class GuiAgent extends Agent {
         cbPrice.setBounds(10, 90, 150, 25);
         paneFilter.add(cbPrice);
         
-//        txtPriceFrom.setBounds(10, 90, 60, 25);
-//        paneFilter.add(txtPriceFrom);
-//        
-//        lblTo1.setText("Até");
-//        lblTo1.setBounds(75, 90, 30, 25);
-//        paneFilter.add(lblTo1);
-//        
-//        txtPriceTo.setBounds(100, 90, 60, 25);
-//        paneFilter.add(txtPriceTo);
-        
         // distance
         lblDistance.setText("Distância");
         lblDistance.setBounds(170, 70, 150, 15);
@@ -251,16 +222,7 @@ public class GuiAgent extends Agent {
         txtDistanceTo.setText("10");
         txtDistanceTo.setBounds(260, 90, 60, 25);
         paneFilter.add(txtDistanceTo);
-        
-//        // bairro
-//        lblDistrict.setText("Selecione seu bairro");
-//        lblDistrict.setBounds(10, 120, 310, 15);
-//        paneFilter.add(lblDistrict);
-//        
-//        cbDistrict.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Centro", "São João", "Cidade Nova", "Praia Brava" }));
-//        cbDistrict.setBounds(10, 140, 310, 25);
-//        paneFilter.add(cbDistrict);
-        
+
         framePane.add(paneFilter);
         
         // botão procurar

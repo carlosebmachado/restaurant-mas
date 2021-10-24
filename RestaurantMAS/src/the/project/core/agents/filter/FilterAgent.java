@@ -33,7 +33,6 @@ public class FilterAgent extends Agent {
                     System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
                     String receiver = "SearchAgent";
                     try {
-                        System.out.println("Chega aqui2");  
                         RequestSearch req = (RequestSearch) rec.getContentObject();                        
                         Request preferencias = req.getPreferencias();                        
                         ArrayList<Restaurant> restaurantes = req.getRestaurantes();
@@ -50,11 +49,11 @@ public class FilterAgent extends Agent {
                         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(req);
                         send(msg);
-                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
+                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".\n");
 
                     } catch (UnreadableException e) {
-                        System.out.println("Erro: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
-                    } catch (IOException e) {
+                    } 
+                    catch (IOException e) {
                         System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
                     }
                 } else {
