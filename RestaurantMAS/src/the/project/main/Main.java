@@ -9,9 +9,9 @@ public class Main {
             "-gui",
             "GuiAgent:the.project.core.agents.gui.GuiAgent;" +
             "SearchAgent:the.project.core.agents.search.AgenteBuscaRestaurante;" +
-            "ScoreAgent:the.project.core.agents.score.ScoreAgent;" +
-            "PriceAgent:the.project.core.agents.price.PriceAgent;" +
-            "DistanceAgent:the.project.core.agents.distance.DistanceAgent"};
+            "ScoreAgent:the.project.core.agents.filter.score.ScoreAgent;" +
+            "PriceAgent:the.project.core.agents.filter.price.PriceAgent;" +
+            "DistanceAgent:the.project.core.agents.filter.distance.DistanceAgent"};
         jade.Boot.main(a);
     }
     

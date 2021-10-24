@@ -203,7 +203,7 @@ public class GuiAgent extends Agent {
         lblType.setBounds(10, 20, 150, 15);
         paneFilter.add(lblType);
         
-        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árabe", "Brasileira", "Japonesa", "Hambúrguer", "Pizza" }));
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Árabe", "Brasileira", "Japonesa", "Hambúrguer", "Pizza", "Pastel", "Padaria" }));
         cbType.setBounds(10, 40, 150, 25);
         paneFilter.add(cbType);
         

@@ -6,6 +6,8 @@
         <item>Japonesa</item>
         <item>Hambúrger</item>
         <item>Pizza</item>
+        <item>Pastel</item>
+        <item>Padaria</item>
     </string-array>
     <string-array name="score">
         <item>⋆⋆⋆⋆⋆</item>

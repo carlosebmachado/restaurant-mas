@@ -52,10 +52,10 @@ public class AgenteBuscaRestaurante extends Agent {
             private int state = 0;
             @Override
             public void action() {
-                MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);			
+                MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
                 ACLMessage message = myAgent.receive(template);
                 if (message != null) {
-                   System.out.println("SearchAgente:Recebi uma mensagem Do SearchAgent");
+                   System.out.println("SearchAgente:Recebi uma mensagem Do " + message.getSender().getLocalName());
                    RequestSearch busca;	
                    try {
                        busca = (RequestSearch) message.getContentObject();
@@ -69,7 +69,7 @@ public class AgenteBuscaRestaurante extends Agent {
                        Logger.getLogger(AgenteBuscaRestaurante.class.getName()).log(Level.SEVERE, null, ex);
                    }  
                    catch (IOException ep) {
-                        System.out.println("SearchAgente:Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
+                        System.out.println("SearchAgente:Erro ao enviar mensagem: AgenteBuscaRestaurante -> DistanceAgent");
                     }
                 }
             }
