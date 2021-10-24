@@ -9,6 +9,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -88,9 +89,7 @@ public class GuiAgent extends Agent {
                     try {
                         Request req = (Request) rec.getContentObject();
                         ArrayList<Restaurant> restaurantes = new ArrayList<>();
-                        for(Restaurant rest : RestaurantData.data){
-                             restaurantes.add(rest);
-                        }
+                        restaurantes.addAll(Arrays.asList(RestaurantData.data));
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(new RequestSearch(restaurantes,req));

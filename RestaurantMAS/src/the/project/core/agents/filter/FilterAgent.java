@@ -8,6 +8,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import the.project.core.objects.Request;
 import the.project.core.objects.RequestSearch;
 import the.project.core.objects.Restaurant;
@@ -32,16 +33,19 @@ public class FilterAgent extends Agent {
                     System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
                     String receiver = "SearchAgent";
                     try {
-                        RequestSearch req = (RequestSearch) rec.getContentObject();
-
-                        Request preferencias = req.getPreferencias();
+                        System.out.println("Chega aqui2");  
+                        RequestSearch req = (RequestSearch) rec.getContentObject();                        
+                        Request preferencias = req.getPreferencias();                        
                         ArrayList<Restaurant> restaurantes = req.getRestaurantes();
-                        for (Restaurant rest : restaurantes) {
-                            if (filter(rest, preferencias)) {
-                                restaurantes.remove(rest);
-                            }
-                        }
-                        
+                        ArrayList<Restaurant> filter_restaurantes = new ArrayList<>();
+                                       
+                        for (Iterator<Restaurant> it = restaurantes.iterator(); it.hasNext();) {
+                               Restaurant rest = it.next();
+                               if (filter(rest, preferencias)) {
+                                  filter_restaurantes.add(rest);
+                               }
+                           }
+                        req.setRestaurantes(filter_restaurantes);                       
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
                         msg.setContentObject(req);
@@ -49,6 +53,7 @@ public class FilterAgent extends Agent {
                         System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".");
 
                     } catch (UnreadableException e) {
+                        System.out.println("Erro: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
                     } catch (IOException e) {
                         System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
                     }

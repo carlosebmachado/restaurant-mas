@@ -52,7 +52,6 @@ public class AgenteBuscaRestaurante extends Agent {
             private int state = 0;
             @Override
             public void action() {
-                System.out.println("SearchAgente:Executing behavour Receber mensagem e enviar para o PriceAgent");
                 MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);			
                 ACLMessage message = myAgent.receive(template);
                 if (message != null) {
@@ -190,6 +189,15 @@ public class AgenteBuscaRestaurante extends Agent {
                 }
             }           
         }, "Z");
+        
+        behaviour.registerTransition("W", "X", 1); // X -> Z caso onEnd() do X retorne 0
+        behaviour.registerTransition("X", "Y", 1); // X -> Y caso onEnd() do X retorne 1
+        behaviour.registerTransition("Y", "Z", 1);
+        behaviour.registerTransition("W", "W", 0);
+        behaviour.registerTransition("X", "X", 0);
+        behaviour.registerTransition("Y", "Y", 0);
+        
+        addBehaviour(behaviour);
     }
 
 
