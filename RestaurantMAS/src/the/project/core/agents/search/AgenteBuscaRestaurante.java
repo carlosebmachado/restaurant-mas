@@ -39,7 +39,6 @@ public class AgenteBuscaRestaurante extends Agent {
                 System.out.println("SearchAgente:Olá!! Eu sou o SearchAgent.");
             }
         });
-        addBehaviour(new BehaviourBusca());
         
         FSMBehaviour behaviour = new FSMBehaviour(this) {
             @Override
@@ -48,7 +47,8 @@ public class AgenteBuscaRestaurante extends Agent {
                 return 0;
             }
         };
-        behaviour.registerFirstState(new CyclicBehaviour(this) {            
+        behaviour.registerFirstState(new BehaviourBusca(), "V");
+        behaviour.registerState(new CyclicBehaviour(this) {            
             private int state = 0;
             @Override
             public void action() {
@@ -72,13 +72,15 @@ public class AgenteBuscaRestaurante extends Agent {
                         System.out.println("SearchAgente:Erro ao enviar mensagem: AgenteBuscaRestaurante -> DistanceAgent");
                     }
                 }
+                else{
+                    block();
+                }
             }
             @Override
             public int onEnd() {
                 return state;
             }
         }, "W");
-        
         // adicionando o segundo comportamento - Z
         behaviour.registerState(new CyclicBehaviour(this) {            
             private int state = 0;
@@ -104,6 +106,9 @@ public class AgenteBuscaRestaurante extends Agent {
                    catch (IOException ep) {
                         System.out.println("SearchAgente:Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
                     }
+                }
+                else{
+                    block();
                 }
             }
             @Override
@@ -137,6 +142,9 @@ public class AgenteBuscaRestaurante extends Agent {
                         System.out.println("SearchAgente:Erro ao enviar mensagem: SearchAgent -> ScoreAgent");
                     }
                 }
+                else{
+                    block();
+                }
             }
             @Override
             public int onEnd() {
@@ -157,24 +165,22 @@ public class AgenteBuscaRestaurante extends Agent {
                    try {
                        busca = (RequestSearch) message.getContentObject();
                         ArrayList<Restaurant> restaurantes = busca.getRestaurantes();
-                        Collections.sort (restaurantes, new Comparator() {
-                            public int compare(Object o1, Object o2) {
-                                Restaurant r1 = (Restaurant) o1;
-                                Restaurant r2 = (Restaurant) o2;
-                                if(r1.getPrice().length() < r2.getPrice().length() && Float.parseFloat(r1.getDistance()) < Float.parseFloat(r2.getDistance()) && r1.getScore().length() > r2.getScore().length()){
-                                    return +1;
-                                }
-                                else if(r1.getPrice().length() < r2.getPrice().length() && Float.parseFloat(r1.getDistance()) < Float.parseFloat(r2.getDistance()) ){
-                                    return +1;
-                                }
-                                else if(r1.getPrice().length() < r2.getPrice().length()){
-                                    return +1;
-                                }
-                                else{
-                                    return -1;
-                                }                                
+                        Collections.sort (restaurantes, (Object o1, Object o2) -> {
+                            Restaurant r1 = (Restaurant) o1;
+                            Restaurant r2 = (Restaurant) o2;
+                            if(r1.getPrice().length() < r2.getPrice().length() && Float.parseFloat(r1.getDistance()) < Float.parseFloat(r2.getDistance()) && r1.getScore().length() > r2.getScore().length()){
+                                return +1;                                
                             }
-                        });                        
+                            else if(r1.getPrice().length() < r2.getPrice().length() && Float.parseFloat(r1.getDistance()) < Float.parseFloat(r2.getDistance()) ){
+                                return +1;
+                            }
+                            else if(r1.getPrice().length() < r2.getPrice().length()){
+                                return +1;
+                            }
+                            else{
+                                return -1;
+                            }
+                       });                        
                        ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                         msg.addReceiver(new AID("GuiAgent", AID.ISLOCALNAME));
                         msg.setContentObject(busca);
@@ -187,12 +193,17 @@ public class AgenteBuscaRestaurante extends Agent {
                         System.out.println("SearchAgente:Erro ao enviar mensagem: DistanceAgent -> AgenteBuscaRestaurante");
                     }
                 }
+                else{
+                    block();
+                }
             }           
         }, "Z");
         
+        behaviour.registerTransition("V", "W", 1);
         behaviour.registerTransition("W", "X", 1); // X -> Z caso onEnd() do X retorne 0
         behaviour.registerTransition("X", "Y", 1); // X -> Y caso onEnd() do X retorne 1
         behaviour.registerTransition("Y", "Z", 1);
+        behaviour.registerTransition("V", "V", 0);
         behaviour.registerTransition("W", "W", 0);
         behaviour.registerTransition("X", "X", 0);
         behaviour.registerTransition("Y", "Y", 0);

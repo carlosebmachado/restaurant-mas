@@ -26,8 +26,8 @@ import the.project.core.objects.Restaurant;
  *
  * @author JF
  */
-public class BehaviourBusca extends OneShotBehaviour{
-
+public class BehaviourBusca extends CyclicBehaviour{
+    private int state = 0;
     @Override   
     public void action() {
                 ACLMessage message = receiveMessage(ACLMessage.REQUEST);	
@@ -54,6 +54,8 @@ public class BehaviourBusca extends OneShotBehaviour{
                             msg.setContentObject(busca);                           
                             search.send(msg);
                             System.out.println("SearchAgent: Finalizei o filtro de tipo de comida, enviando mensagem com lista atualizada.");
+                            state = 1;
+                             onEnd();
                        }
                        else{
                            System.out.println("MEnsagem nula");
@@ -70,6 +72,10 @@ public class BehaviourBusca extends OneShotBehaviour{
                 MessageTemplate template = MessageTemplate.MatchPerformative(INFORM);			
                 ACLMessage message = myAgent.receive(template);
                 return message;
+            }
+            @Override
+            public int onEnd() {
+                return state;
             }
     
 }
