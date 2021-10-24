@@ -13,11 +13,19 @@ import android.widget.Toast;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
+
+import jade.core.AID;
 import jade.core.Agent;
 
-import us.app.restaurant.data.RestaurantData;
+import jade.lang.acl.ACLMessage;
+import us.app.restaurant.core.agents.gui.GuiAgent;
+import us.app.restaurant.core.data.RestaurantData;
+import us.app.restaurant.core.objects.Request;
 
 public class MainActivity extends AppCompatActivity {
+
+    private GuiAgent guiAgent;
 
     private ScrollView scrollView;
 
@@ -32,46 +40,43 @@ public class MainActivity extends AppCompatActivity {
     public void search(View v){
         Toast.makeText(this, "Procurando...", Toast.LENGTH_SHORT).show();
 
-        // exemplo de popup
-        popup();
+//        for (int i = 0; i < 4; ++i){
+//            Fragment fragment = RestaurantCard.newInstance(RestaurantData.data[i].getImage(),
+//                                                           RestaurantData.data[i].getName(),
+//                                                           RestaurantData.data[i].getScore(),
+//                                                           RestaurantData.data[i].getPrice(),
+//                                                           RestaurantData.data[i].getDistance(),
+//                                                           RestaurantData.data[i].getType());
+//
+//            getSupportFragmentManager().beginTransaction().add(R.id.layCards, fragment).commit();
+//        }
 
-        for (int i = 0; i < 4; ++i){
-            Fragment fragment = RestaurantCard.newInstance(RestaurantData.data[i][RestaurantData.PHOTO],
-                                                           RestaurantData.data[i][RestaurantData.NAME],
-                                                           RestaurantData.data[i][RestaurantData.SCORE],
-                                                           RestaurantData.data[i][RestaurantData.PRICE],
-                                                           RestaurantData.data[i][RestaurantData.DISTANCE],
-                                                           RestaurantData.data[i][RestaurantData.TYPE]);
-
-            getSupportFragmentManager().beginTransaction().add(R.id.layCards, fragment).commit();
-        }
+//        String type = cbType.getSelectedItem().toString();
+//        String score = cbScore.getSelectedItem().toString();
+//        String price = cbPrice.getSelectedItem().toString();
+//        float distanceFrom;
+//        try { distanceFrom = Float.parseFloat(txtDistanceFrom.toString()); }
+//        catch (NumberFormatException e) { distanceFrom = 0; }
+//
+//        float distanceTo;
+//        try { distanceTo = Float.parseFloat(txtDistanceTo.toString()); }
+//        catch (NumberFormatException e) { distanceTo = 0; }
+//
+//        try {
+//            ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+//            msg.setSender(new AID("Usuário", AID.ISLOCALNAME));
+//            msg.addReceiver(new AID("GuiAgent", AID.ISLOCALNAME));
+//            msg.setContentObject(new Request(type, price, distanceFrom, distanceTo, score));
+//            guiAgent.send(msg);
+//        } catch (IOException e) {
+//            System.out.println("Erro ao enviar mensagem: Usuário -> GuiAgent");
+//        }
 
         scrollView.setVisibility(View.VISIBLE);
     }
 
-    private void popup(){
-        // provavelmente será criada uma classe
-        // referencia: https://developer.android.com/guide/topics/ui/dialogs?hl=pt-br
+    public void filters(View v){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // Add the buttons
-        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
-            }
-        });
-        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
-            }
-        });
-        // Set other dialog properties
-        builder.setMessage("Hm... Achamos apenas 1 restaurante desse tipo perto de você.\nVocê se importaria de andar por pelo menos 10km?").setTitle("Assistente");
-
-        // Create the AlertDialog
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
     }
 
 }

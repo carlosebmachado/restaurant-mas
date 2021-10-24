@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="types">
+        <item>Árabe</item>
+        <item>Brasileira</item>
+        <item>Japonesa</item>
+        <item>Hambúrger</item>
+        <item>Pizza</item>
+    </string-array>
+    <string-array name="score">
+        <item>⋆⋆⋆⋆⋆</item>
+        <item>⋆⋆⋆⋆</item>
+        <item>⋆⋆⋆</item>
+        <item>⋆⋆</item>
+        <item>⋆</item>
+    </string-array>
+    <string-array name="price">
+        <item>$$$</item>
+        <item>$$</item>
+        <item>$</item>
+    </string-array>
+</resources>
