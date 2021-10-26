@@ -43,7 +43,7 @@ public class FilterAgent extends Agent {
                                if (filter(rest, preferencias)) {
                                   filter_restaurantes.add(rest);
                                }
-                           }
+                        }
                         req.setRestaurantes(filter_restaurantes);                       
                         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));

@@ -40,7 +40,7 @@ public class AgenteBuscaRestaurante extends Agent {
 
         behaviour.registerFirstState(new BehaviourBusca(), "V");
 
-        behaviour.registerState(new CyclicBehaviour(this) {
+        behaviour.registerState(new OneShotBehaviour(this) {
             private int state = 0;
 
             @Override
@@ -76,7 +76,7 @@ public class AgenteBuscaRestaurante extends Agent {
             }
         }, "W");
 
-        behaviour.registerState(new CyclicBehaviour(this) {
+        behaviour.registerState(new OneShotBehaviour(this) {
             private int state = 0;
 
             @Override
@@ -112,7 +112,7 @@ public class AgenteBuscaRestaurante extends Agent {
             }
         }, "X");
 
-        behaviour.registerState(new CyclicBehaviour(this) {
+        behaviour.registerState(new OneShotBehaviour(this) {
             private int state = 0;
 
             @Override
@@ -148,7 +148,8 @@ public class AgenteBuscaRestaurante extends Agent {
             }
         }, "Y");
 
-        behaviour.registerLastState(new CyclicBehaviour(this) {
+        behaviour.registerState(new OneShotBehaviour(this) {
+            private int state = 0;
             @Override
             public void action() {
                 System.out.println(getLocalName() + ": Comportamento Z");
@@ -178,6 +179,7 @@ public class AgenteBuscaRestaurante extends Agent {
                         msg.setContentObject(busca);
                         send(msg);
                         System.out.println(getLocalName() + ": Enviei uma mensagem para GuiAgent.\n");
+                        state = 1;
                     } catch (UnreadableException ex) {
                         Logger.getLogger(AgenteBuscaRestaurante.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ep) {
@@ -187,8 +189,13 @@ public class AgenteBuscaRestaurante extends Agent {
                     block();
                 }
             }
+             @Override
+            public int onEnd() {
+                System.out.println("onEnd state Y: " + state);
+                return state;
+            }
         }, "Z");
-
+        
         behaviour.registerDefaultTransition("V", "V", new String[]{"V"});
         behaviour.registerTransition("V", "W", 1);
         behaviour.registerDefaultTransition("W", "W", new String[]{"W"});
@@ -197,6 +204,8 @@ public class AgenteBuscaRestaurante extends Agent {
         behaviour.registerTransition("X", "Y", 1);
         behaviour.registerDefaultTransition("Y", "Y", new String[]{"Y"});
         behaviour.registerTransition("Y", "Z", 1);
+        behaviour.registerDefaultTransition("Z", "Z", new String[]{"Z"});
+        behaviour.registerTransition("Z", "V", 1);
 
         addBehaviour(behaviour);
     }

@@ -81,27 +81,46 @@ public class GuiAgent extends Agent {
                 String receiver = "SearchAgent";
                 if (rec != null) {
                     System.out.println(getLocalName() + ": Recebi uma mensagem de " + rec.getSender().getLocalName() + ".");
-                    try {
-                        Request req = (Request) rec.getContentObject();
-                        ArrayList<Restaurant> restaurantes = new ArrayList<>();
-                        restaurantes.addAll(Arrays.asList(RestaurantData.data));
-                        ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
-                        msg.setContentObject(new RequestSearch(restaurantes,req));
-                        send(msg);
-                        System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".\n");
+                    if(rec.getSender().getLocalName().contains("Usuário")){
+                        try {
+                            Request req = (Request) rec.getContentObject();
+                            ArrayList<Restaurant> restaurantes = new ArrayList<>();
+                            restaurantes.addAll(Arrays.asList(RestaurantData.data));
+                            ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+                            msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
+                            msg.setContentObject(new RequestSearch(restaurantes,req));
+                            send(msg);
+                            System.out.println(getLocalName() + ": Enviei uma mensagem para " + receiver + ".\n");
                         
-                    } catch (UnreadableException e) {
-                    } catch (IOException e) {
-                        System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
+                        } catch (UnreadableException e) {
+                        } catch (IOException e) {
+                            System.out.println("Erro ao enviar mensagem: " + getLocalName() + " -> " + receiver + ". Erro: " + e.toString());
+                        }
+                    }else{
+                        try {
+                            RequestSearch req = (RequestSearch) rec.getContentObject();
+                            paneResult.removeAll();
+                            req.getRestaurantes().stream().map(r -> {
+                                paneResult.add(new RestaurantCard(r));
+                                return r;
+                            }).map(_item -> {
+                                paneResult.revalidate();
+                                return _item;
+                            }).forEachOrdered(_item -> {
+                                paneResult.repaint();
+                            });
+
+                            System.out.println(getLocalName() + ": Entreguei as informações requisitadas pelo Usuário.\n");                        
+                        } catch (UnreadableException e) {}
                     }
+                    
                 } else {
                     block();
                 }
             }
         });
         
-        addBehaviour(new CyclicBehaviour(this) {
+        /*addBehaviour(new CyclicBehaviour(this) {
             @Override
             public void action() {
                 ACLMessage msg = receive();
@@ -127,7 +146,7 @@ public class GuiAgent extends Agent {
                     block();
                 }
             }
-        });
+        });*/
         
     }
     

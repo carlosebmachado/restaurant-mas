@@ -33,7 +33,7 @@ public class RestaurantData {
             "⋆⋆⋆",
             "$$$",
             "3.4",
-            "Hamburguer"
+            "Hambúguer"
         ),
         new Restaurant(
             "Panificadora Larissa",

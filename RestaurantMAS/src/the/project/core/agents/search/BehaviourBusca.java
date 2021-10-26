@@ -49,6 +49,7 @@ public class BehaviourBusca extends OneShotBehaviour {
                             filter_restaurantes.add(rest);
                         }
                     }
+                    //System.out.println("tamanho da lista:" + filter_restaurantes.size());
                     busca.setRestaurantes(filter_restaurantes);
                     ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                     msg.addReceiver(new AID("SearchAgent", AID.ISLOCALNAME));
