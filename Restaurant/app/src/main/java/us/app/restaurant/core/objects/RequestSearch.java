@@ -7,7 +7,6 @@ package us.app.restaurant.core.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import the.project.core.data.RestaurantData;
 
 /**
  *
@@ -16,7 +15,6 @@ import the.project.core.data.RestaurantData;
 public class RequestSearch implements Serializable {
     ArrayList<Restaurant> restaurantes;
     Request preferencias;
-//    String [][] bairroXdistancia = RestaurantData.bairroXdistancia;
     
     public RequestSearch(ArrayList rest, Request prefer){
         restaurantes = rest;
@@ -40,8 +38,5 @@ public class RequestSearch implements Serializable {
     public void setPreferencias(Request prefers){
         preferencias = prefers;
     }
-    
-//    public String[][] getDistancias(){
-//        return bairroXdistancia;
-//    }
+
 }

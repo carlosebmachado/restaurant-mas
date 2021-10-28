@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ScrollView;
@@ -76,7 +77,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void filters(View v){
+        Intent intent = new Intent(this, FilterActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FilterActivity && resultCode == RESULT_OK && data != null) {
+            num1 = data.getIntExtra(Number1Code);
+            num2 = data.getIntExtra(Number2Code);
+        }
     }
 
 }

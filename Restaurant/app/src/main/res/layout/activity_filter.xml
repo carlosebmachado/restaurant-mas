@@ -75,7 +75,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editTextNumber2"
+                android:id="@+id/txtDistanceFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -94,7 +94,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/txtDistanceTo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
